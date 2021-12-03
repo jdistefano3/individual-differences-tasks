@@ -1,16 +1,28 @@
 var timeline = [];
- 
+
+// enter fullscreen mode
      var fullscreen_trial = {
     type: 'fullscreen',
-    fullscreen_mode: true
+    fullscreen_mode: false
   } 
- 
+
+// welcome page
 var welcome = {
         type: "html-keyboard-response" ,
         stimulus: "Welcome to the experiment. Press any key to begin."
     };
     timeline.push(welcome);
-  
+    
+// input participant id
+var participant_id = {
+      type: "survey-text",
+      questions: [
+      {prompt: 'Please enter the participant ID:'}
+    ]
+};
+timeline.push(participant_id);
+
+// general instructions and practice instructions
 var instructions_1 = {
         type: "html-keyboard-response" ,
         stimulus: `<p>In this task, you will try to figure out the meanings of little known words that most people do not know the meaning of. </p>
@@ -24,7 +36,8 @@ var instructions_1 = {
         `,
         post_trial_gap: 2000
     }
-    
+
+// practice trial setup 
 var practice = {
         type: "html-keyboard-response",
         stimulus: `<p><b><h1 style="font-size:250%;">COTTONTAIL</h1></b></p>
@@ -40,6 +53,7 @@ var practice = {
         post_trial_gap: 2000
     }
 
+// instructions proceeding the actual experimental trials
 var instructions_2 = {
       type: "html-keyboard-response" ,
       stimulus: `<p> You have just completed the practice.</p>
@@ -50,6 +64,7 @@ var instructions_2 = {
       post_trial_gap: 2000
 }
 
+// experimental stimuli lists
 var word_lists = [
     { stimulus: "<p><b><h1 style='font-size:250%;'>MARKETABLE</h1></b></p><p align='justify'>1. Partisan</p><p align='justify'>2. Jocular</p><p align='justify'> 3. Marriageable</p><p align='justify'>4. Salable</p><p align='justify'> 5. Essential </p><div style='width: 700px;'></div>" },
     { stimulus: "<p><b><h1 style='font-size:250%;'>BOGGY</h1></b></p><p align='justify'>1. Afraid</p><p align='justify'>2. False</p><p align='justify'>3. Marshy</p><p align='justify'>4. Dense</p><p align='justify'>5. Black </p><div style='width: 700px;'></div>" },
@@ -100,6 +115,7 @@ var word_lists = [
     { stimulus: "<p><b><h1 style='font-size:250%;'>PRURIENCE</h1></b></p><p align='justify'>1. Modesty</p><p align='justify'>2. Sapience</p><p align='justify'>3. Provender</p><p align='justify'>4. Lust</p><p align='justify'> 5. Secruity </p><div style='width: 700px;'></div>" }
   ];
 
+// set up for experimental trials
 var exp_trial = {
   timeline: [{
       type: "html-keyboard-response",
@@ -111,6 +127,7 @@ var exp_trial = {
  sample: {type: 'fixed-repetitions', size: 1}
 };
 
+// conclusion page
 var conclusion = {
     type: "html-keyboard-response",
         stimulus: `<p> You are now finished the experiment. Thank you for participating!</p>
@@ -119,14 +136,17 @@ var conclusion = {
                   </div>`,
         post_trial_gap: 2000
     }
-    
+
+// exit fullscreen mode
   var fullscreen_trial_exit = {
     type: 'fullscreen',
     fullscreen_mode: false
   }
-    
+
+// initate experiment and timeline
  jsPsych.init({
-        timeline: [fullscreen_trial, welcome, instructions_1, practice, instructions_2, exp_trial, conclusion, fullscreen_trial_exit],
+        timeline: [fullscreen_trial, welcome, participant_id, instructions_1, practice, instructions_2, exp_trial, conclusion, fullscreen_trial_exit],
         show_progress_bar: true,
-        on_finish: function(){jsPsych.data.displayData(); }
+        on_finish: function(){jsPsych.data.displayData(); 
+    }
 });
