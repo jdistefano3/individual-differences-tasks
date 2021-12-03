@@ -12,6 +12,14 @@
   type: 'fullscreen',
   fullscreen_mode: true
 });
+
+    var participant_id = {
+      type: "survey-text",
+      questions: [
+      {prompt: 'Please enter the participant ID:'}
+    ]
+};
+timeline.push(participant_id);
     
 /*instructions*/
 /* define instructions trial */
