@@ -1,4 +1,4 @@
- /* experiment parameters */
+/* experiment parameters */
   var reps_per_trial_type = 4;
 
         /*set up welcome block*/
@@ -6,6 +6,13 @@
           type: "html-keyboard-response",
           stimulus: "Welcome to the experiment. Press any key to begin."
         };
+        
+      var participant_id = {
+      type: "survey-text",
+      questions: [
+      {prompt: 'Please enter the participant ID:'}
+    ]
+};
 
         /*set up instructions block*/
         var instructions = {
@@ -89,6 +96,7 @@
         var timeline = [];
         timeline.push(preload);
         timeline.push(welcome);
+        timeline.push(participant_id);
         timeline.push(instructions);
         timeline.push(test);
         timeline.push(debrief);
