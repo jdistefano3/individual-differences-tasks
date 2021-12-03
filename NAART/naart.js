@@ -1,16 +1,28 @@
 var timeline = [];
- 
+
+// enter fullscreen mode
     var fullscreen_trial = {
     type: 'fullscreen',
     fullscreen_mode: true
   } 
- 
+
+// welcome page
 var welcome = {
         type: "html-keyboard-response" ,
         stimulus: "Welcome to the experiment. Press any key to begin."
     };
     timeline.push(welcome);
-  
+
+// enter participant id
+var participant_id = {
+      type: "survey-text",
+      questions: [
+      {prompt: 'Please enter the participant ID:'}
+    ]
+};
+timeline.push(participant_id);
+
+// first set of instructions for experiment
 var instructions_1 = {
         type: "html-keyboard-response" ,
         stimulus: `
@@ -26,6 +38,7 @@ var instructions_1 = {
           post_trial_gap: 2000
     }
     
+// instructions for audio test
     var instructions_2 = {
         type: "html-keyboard-response" ,
         stimulus: `<p>On the next page, we are going to test your audio. Please say the name of the animal that appears on the screen 5 times. Play your recorded audio and make sure it sounds okay.</p>
@@ -36,6 +49,7 @@ var instructions_1 = {
         post_trial_gap: 2000
     }
 
+// audio test trial
     var audio_test = {
         type:'image-audio-response',
         stimulus: 'img/fox.png',
@@ -44,7 +58,8 @@ var instructions_1 = {
         stimulus_width: 300,
         recording_indicator_type: 2
     }
-    
+
+// instructions proceeding actual experiment
    var instructions_3 = {
         type: "html-keyboard-response",
         stimulus: `<p> Now you will proceed to the actual experiment.</p>
@@ -54,6 +69,7 @@ var instructions_1 = {
         post_trial_gap: 2000
     }
     
+// conclusion page at the end of the experiment
   var conclusion = {
         type: "html-keyboard-response",
         stimulus: `<p> You are now finished the experiment. Thank you for participating!</p>
@@ -63,6 +79,7 @@ var instructions_1 = {
         post_trial_gap: 2000
     }
 
+// experimental stimuli to be shown on the experimental trials
   var words = [
     { stimulus: "<h1 style='font-size:200%;'>Debris</h1>" },
     { stimulus: "<h1 style='font-size:200%;'>Aisle</h1>" },
@@ -126,6 +143,7 @@ var instructions_1 = {
     { stimulus: "<h1 style='font-size:200%;'>Synedoche</h1>" }
   ];
 
+// experimental trials set up 
 var exp_trial = {
     timeline: [{
       type: 'html-audio-response_modified',
@@ -140,13 +158,15 @@ var exp_trial = {
  sample: {type: 'fixed-repetitions', size: 1}
 };
 
+// exit fullscreen mode
   var fullscreen_trial_exit = {
     type: 'fullscreen',
     fullscreen_mode: false
   }
-    
+  
+// initate experiment and timeline
  jsPsych.init({
-        timeline: [fullscreen_trial, welcome, instructions_1, instructions_2, audio_test, instructions_3, exp_trial, fullscreen_trial_exit],
+        timeline: [fullscreen_trial, welcome, participant_id, instructions_1, instructions_2, audio_test, instructions_3, exp_trial, fullscreen_trial_exit],
         show_progress_bar: true,
         on_finish: function(){jsPsych.data.displayData(); }
 });
