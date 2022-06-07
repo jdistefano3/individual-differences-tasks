@@ -1,0 +1,11 @@
+input[type=text] {
+  color: black;
+}
+
+body {
+  background-color: black;
+}
+
+.jspsych-display-element {
+  color: white;
+}
